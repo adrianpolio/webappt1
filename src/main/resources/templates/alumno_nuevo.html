@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Alumno</title>
+</head>
+<body>
+
+<h2>Registrar Alumno</h2>
+
+<form th:action="@{/alumno/guardar}" method="post" th:object="${alumno}">
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}"/><br/>
+
+    <label>Apellido:</label>
+    <input type="text" th:field="*{apellido}"/><br/>
+
+    <label>Fecha de nacimiento:</label>
+    <input type="date" th:field="*{fechaNacimiento}"/><br/>
+
+    <label>Carrera:</label>
+    <select th:field="*{carrera}">
+        <option th:each="c : ${carreras}"
+                th:value="${c.id}"
+                th:text="${c.nombreCarrera}"></option>
+    </select><br/><br/>
+
+    <button type="submit">Guardar</button>
+</form>
+
+<div th:if="${param.exito}">
+    <p>Alumno guardado exitosamente!</p>
+</div>
+
+</body>
+</html>

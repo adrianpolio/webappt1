@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Cursos</title>
+</head>
+<body>
+
+<h2>Listado de cursos por carrera</h2>
+
+<form method="get" th:action="@{/curso/listar}">
+    <select name="carreraId">
+        <option value="">-- Todas --</option>
+        <option th:each="c : ${carreras}"
+                th:value="${c.id}"
+                th:selected="${c.id == carreraId}"
+                th:text="${c.nombreCarrera}"></option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<br/>
+
+<table border="1">
+    <tr>
+        <th>Curso</th>
+        <th>Ciclo</th>
+        <th>Docente</th>
+        <th>Carrera</th>
+        <th>Facultad</th>
+    </tr>
+
+    <tr th:each="curso : ${cursos}">
+        <td th:text="${curso.nombreCurso}"></td>
+        <td th:text="${curso.ciclo}"></td>
+        <td th:text="${curso.docente}"></td>
+        <td th:text="${curso.carrera.nombreCarrera}"></td>
+        <td th:text="${curso.carrera.facultad}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
